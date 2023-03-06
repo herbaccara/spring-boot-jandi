@@ -10,13 +10,13 @@ import org.springframework.web.client.postForObject
 
 class JandiTemplate(private val restTemplate: RestTemplate) {
 
-    fun send(webhookUrl: String, message: JandiMessage) {
+    fun send(webhookUrl: String, message: JandiMessage): JsonNode {
         val headers = HttpHeaders().apply {
             add("accept", "application/vnd.tosslab.jandi-v2+json")
             contentType = MediaType.APPLICATION_JSON
         }
 
         val httpEntity = HttpEntity(message, headers)
-        val json = restTemplate.postForObject<JsonNode>(webhookUrl, httpEntity)
+        return restTemplate.postForObject(webhookUrl, httpEntity)
     }
 }
