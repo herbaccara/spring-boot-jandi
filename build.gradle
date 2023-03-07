@@ -10,7 +10,7 @@ plugins {
 }
 
 group = 'herbaccara'
-version = '0.0.1'
+version = '0.0.2'
 sourceCompatibility = '1.8'
 
 publishing {
@@ -44,6 +44,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3'
 
+    implementation 'org.springframework.boot:spring-boot:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.7.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
 }
 
