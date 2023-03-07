@@ -1,7 +1,6 @@
 package herbaccara.jandi
 
 import com.fasterxml.jackson.databind.JsonNode
-import herbaccara.boot.autoconfigure.jandi.JandiProperties
 import herbaccara.jandi.model.JandiMessage
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
@@ -9,16 +8,13 @@ import org.springframework.http.MediaType
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.postForObject
 
-class DefaultJandiService(
-    private val restTemplate: RestTemplate,
-    private val properties: JandiProperties
+class DefaultJandiService @JvmOverloads constructor(
+    private val webhookUrl: String,
+    private val restTemplate: RestTemplate = RestTemplate()
 ) : JandiService {
 
     override fun send(message: JandiMessage): JsonNode {
-        val defaultWebhookUrl = properties.defaultWebhookUrl
-        if (defaultWebhookUrl.isNullOrBlank()) throw RuntimeException("webhookUrl must not be empty")
-
-        return send(defaultWebhookUrl, message)
+        return send(webhookUrl, message)
     }
 
     override fun send(webhookUrl: String, message: JandiMessage): JsonNode {

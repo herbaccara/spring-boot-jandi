@@ -50,6 +50,6 @@ class JandiAutoConfiguration {
         restTemplate: RestTemplate,
         properties: JandiProperties
     ): JandiService {
-        return DefaultJandiService(restTemplate, properties)
+        return DefaultJandiService(properties.webhookUrl, restTemplate)
     }
 }

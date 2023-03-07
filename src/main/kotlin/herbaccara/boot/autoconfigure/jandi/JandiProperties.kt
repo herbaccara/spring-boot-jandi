@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConstructorBinding
 @ConstructorBinding
 data class JandiProperties(
     val enabled: Boolean = true,
-    val defaultWebhookUrl: String? = null,
+    val webhookUrl: String,
     val webhook: Webhook = Webhook(true, DEFAULT_WEBHOOK_PATH)
 ) {
     companion object {
