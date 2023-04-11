@@ -6,11 +6,12 @@ plugins {
     id 'maven-publish'
     id 'org.jetbrains.kotlin.jvm' version '1.7.22'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.7.22'
+    id "org.jetbrains.kotlin.kapt" version "1.7.22"
     id "org.jmailen.kotlinter" version "3.13.0"
 }
 
 group = 'herbaccara'
-version = '0.0.2'
+version = '0.0.3'
 sourceCompatibility = '1.8'
 
 publishing {
@@ -34,6 +35,13 @@ repositories {
     maven { url = uri("https://jitpack.io") }
 }
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+        extendsFrom kapt
+    }
+}
+
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
@@ -47,6 +55,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot:2.7.0'
     implementation 'org.springframework.boot:spring-boot-autoconfigure:2.7.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.0'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:2.7.0"
+    kapt "org.springframework.boot:spring-boot-configuration-processor:2.7.0"
 }
 
 tasks.withType(KotlinCompile) {
